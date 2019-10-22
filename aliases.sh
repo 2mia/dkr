@@ -22,6 +22,10 @@ function dkr-cleani(){
     docker rmi $(docker images | grep "^<none>"  | expand | tr -s ' '  | cut -d ' ' -f3)
 }
 
+function dkr-cleanv(){
+    docker volume rm `docker volume ls -q -f dangling=true`
+}
+
 function dkr-self-update(){
     cd $DKR_HOME 
     git pull upstream master
